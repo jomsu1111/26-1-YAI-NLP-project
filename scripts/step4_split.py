@@ -14,8 +14,8 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-INPUT_PATH  = "./feature_matrix.csv"
-OUTPUT_DIR  = "./splits"
+INPUT_PATH  = "../data/feature_matrix.csv"
+OUTPUT_DIR  = "../splits"
 RANDOM_SEED = 42
 
 FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine"]

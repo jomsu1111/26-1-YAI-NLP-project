@@ -23,11 +23,11 @@ from sklearn.metrics import (
     classification_report,
 )
 
-MODEL_PATH   = "./xgb_model_v3_all4.pkl"
-VAL_PATH     = "./splits/val.csv"
-TEST_PATH    = "./splits/test.csv"
-PRED_PATH    = "./test_predictions.csv"
-REPORT_PATH  = "./evaluation_report.txt"
+MODEL_PATH   = "../models/xgb_model_v3_all4.pkl"
+VAL_PATH     = "../splits/val.csv"
+TEST_PATH    = "../splits/test.csv"
+PRED_PATH    = "../data/test_predictions.csv"
+REPORT_PATH  = "../results/evaluation_report.txt"
 
 FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
 
@@ -176,5 +176,5 @@ print(f"예측 결과 저장: {PRED_PATH}")
 print(f"컬럼: {df_pred.columns.tolist()}")
 
 print("\n[C팀 전달 파일]")
-print(f"  모델  : xgb_model_v3_all4.pkl")
-print(f"  예측값: test_predictions.csv")
+print(f"  모델  : models/xgb_model_v3_all4.pkl")
+print(f"  예측값: data/test_predictions.csv")

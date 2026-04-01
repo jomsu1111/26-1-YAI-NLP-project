@@ -13,7 +13,7 @@ Step 2 & 3: HaluEval 포맷 통일
 import pandas as pd
 from datasets import load_dataset
 
-OUTPUT_PATH = "./unified_dataset.csv"
+OUTPUT_PATH = "../data/unified_dataset.csv"
 
 # 태스크별 컬럼 매핑 정의
 # context_col  : 근거 문서 컬럼명

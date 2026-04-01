@@ -8,8 +8,8 @@ NLI/NER/SBERT는 이미 계산되어 있으므로 건드리지 않음
 import pandas as pd
 from rouge_score import rouge_scorer as rouge_lib
 
-INPUT_PATH  = "./feature_matrix.csv"
-OUTPUT_PATH = "./feature_matrix.csv"  # 덮어쓰기
+INPUT_PATH  = "../data/feature_matrix.csv"
+OUTPUT_PATH = "../data/feature_matrix.csv"  # 덮어쓰기
 
 df = pd.read_csv(INPUT_PATH)
 print(f"로드: {len(df):,} rows")

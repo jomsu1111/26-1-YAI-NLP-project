@@ -17,9 +17,9 @@ import shap
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import roc_curve, auc
 
-MODEL_PATH = "./xgb_model_v3_all4.pkl"
-PRED_PATH  = "./test_predictions.csv"
-FIG_DIR    = "./figures"
+MODEL_PATH = "../models/xgb_model_v3_all4.pkl"
+PRED_PATH  = "../data/test_predictions.csv"
+FIG_DIR    = "../figures"
 FEATURES   = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
 
 import os

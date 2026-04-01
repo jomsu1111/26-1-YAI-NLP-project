@@ -21,9 +21,9 @@ from sklearn.metrics import roc_auc_score, f1_score
 
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 
-TRAIN_PATH  = "./splits/train.csv"
-VAL_PATH    = "./splits/val.csv"
-SPW_PATH    = "./splits/scale_pos_weight.txt"
+TRAIN_PATH  = "../splits/train.csv"
+VAL_PATH    = "../splits/val.csv"
+SPW_PATH    = "../splits/scale_pos_weight.txt"
 RANDOM_SEED = 42
 N_TRIALS    = 100
 
@@ -103,12 +103,12 @@ def run_experiment(version: str, features: list) -> dict:
     val_f1    = f1_score(y_val, (val_prob >= 0.5).astype(int))
 
     # 모델 저장
-    model_path = f"./xgb_model_{version}.pkl"
+    model_path = f"../models/xgb_model_{version}.pkl"
     with open(model_path, "wb") as f:
         pickle.dump(final_model, f)
 
     # Optuna 결과 저장
-    study.trials_dataframe().to_csv(f"./optuna_results_{version}.csv", index=False)
+    study.trials_dataframe().to_csv(f"../results/optuna_results_{version}.csv", index=False)
 
     # Feature importance 출력
     importances = final_model.feature_importances_
@@ -137,7 +137,7 @@ for version, features in FEATURE_SETS.items():
 
 # 비교 요약 출력
 df_comparison = pd.DataFrame(results)[["version", "features", "val_auroc", "val_f1"]]
-df_comparison.to_csv("./feature_comparison.csv", index=False)
+df_comparison.to_csv("../results/feature_comparison.csv", index=False)
 
 print("\n" + "=" * 55)
 print("3가지 버전 비교 (val set 기준)")

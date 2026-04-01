@@ -22,8 +22,8 @@ from rouge_score import rouge_scorer as rouge_lib
 from transformers import pipeline
 from sentence_transformers import SentenceTransformer
 
-INPUT_PATH     = "./unified_dataset.csv"
-OUTPUT_PATH    = "./feature_matrix.csv"
+INPUT_PATH     = "../data/unified_dataset.csv"
+OUTPUT_PATH    = "../data/feature_matrix.csv"
 CHECKPOINT_EVERY = 500  # 몇 행마다 중간 저장할지
 
 
