@@ -18,7 +18,8 @@ Code/
 │   ├── step4_split.py                # Train / Val / Test 분할
 │   ├── step5_train_xgboost.py        # XGBoost 학습 + Optuna 하이퍼파라미터 튜닝
 │   ├── step6_evaluate.py             # 최종 모델 평가 및 리포트 생성
-│   └── step7_analysis.py             # SHAP / Calibration / ROC 시각화
+│   ├── step7_analysis.py             # SHAP / Calibration / ROC 시각화
+│   └── step8_error_analysis.py       # 오답 유형(FP/FN) 분석 + Dialogue 오류 패턴
 │
 ├── data/
 │   ├── unified_dataset.csv       # 3개 도메인 통합 (30,000행)
@@ -37,17 +38,21 @@ Code/
 │   └── xgb_model_v3_all4.pkl     # v3: NLI + NER + SBERT + ROUGE-L (최종 사용)
 │
 ├── results/
-│   ├── evaluation_report.txt         # 전체 및 도메인별 평가 지표
-│   ├── feature_comparison.csv        # 3가지 피처 조합 성능 비교
-│   ├── optuna_results_v1_ner.csv     # v1 Optuna 튜닝 로그
-│   ├── optuna_results_v2_rougel.csv  # v2 Optuna 튜닝 로그
-│   └── optuna_results_v3_all4.csv    # v3 Optuna 튜닝 로그
+│   ├── evaluation_report.txt                  # 전체 및 도메인별 평가 지표
+│   ├── feature_comparison.csv                 # 피처 조합별 성능 비교 (v1~v5)
+│   ├── optuna_results_v1_ner.csv              # v1 Optuna 튜닝 로그
+│   ├── optuna_results_v2_rougel.csv           # v2 Optuna 튜닝 로그
+│   ├── optuna_results_v3_all4.csv             # v3 Optuna 튜닝 로그
+│   └── error_analysis_dialogue_samples.csv    # Dialogue FP/FN 오답 예시 (각 20개)
 │
 └── figures/
-    ├── shap_summary.png          # SHAP Beeswarm Plot
-    ├── shap_bar.png              # Feature Importance (Mean |SHAP|)
-    ├── calibration_curve.png     # Calibration Curve (전체 + 도메인별)
-    └── domain_roc.png            # 도메인별 ROC / AUROC
+    ├── shap_summary.png              # SHAP Beeswarm Plot
+    ├── shap_bar.png                  # Feature Importance (Mean |SHAP|)
+    ├── calibration_curve.png         # Calibration Curve (전체 + 도메인별)
+    ├── domain_roc.png                # 도메인별 ROC / AUROC
+    ├── error_fp_fn_by_domain.png     # 도메인별 FP / FN 수 및 비율
+    ├── error_feature_dist.png        # FP / FN 케이스 피처값 분포
+    └── error_dialogue_features.png   # Dialogue 도메인 오류 유형별 피처 분포
 ```
 
 ---
@@ -115,6 +120,10 @@ python scripts/step6_evaluate.py
 # 7. SHAP / Calibration / ROC 시각화
 python scripts/step7_analysis.py
 # → figures/*.png 생성
+
+# 8. 오답 유형 분석 (FP/FN)
+python scripts/step8_error_analysis.py
+# → figures/error_*.png, results/error_analysis_dialogue_samples.csv 생성
 ```
 
 ---
@@ -126,8 +135,11 @@ python scripts/step7_analysis.py
 | v1 | NLI + NER + SBERT | 0.7218 | 0.6655 |
 | v2 | NLI + ROUGE-L + SBERT | 0.8159 | 0.7442 |
 | **v3** | **NLI + NER + SBERT + ROUGE-L** | **0.8279** | **0.7529** |
+| v4 (ablation) | NLI + NER + ROUGE-L (SBERT 제외) | 0.8097 | 0.7533 |
+| v5 (ablation) | NLI + ROUGE-L | 0.7882 | 0.7440 |
 
-→ **v3 (4개 피처 전부)** 가 최고 성능으로 최종 모델로 채택
+→ **v3 (4개 피처 전부)** 가 AUROC 기준 최고 성능으로 최종 모델로 채택
+- v4 ablation: SBERT 제거 시 AUROC -0.018 하락 → sbert_cosine이 paraphrase hallucination 탐지에 기여함을 확인
 
 ---
 
