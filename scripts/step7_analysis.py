@@ -8,22 +8,27 @@ Step 7: SHAP 분석 + Calibration Curve + 도메인별 AUROC 시각화
        figures/domain_roc.png
 """
 
+import os
 import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import shap
+from pathlib import Path
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import roc_curve, auc
 
-MODEL_PATH = "../models/xgb_model_v3_all4.pkl"
-PRED_PATH  = "../data/test_predictions.csv"
-FIG_DIR    = "../figures"
+BASE       = Path(__file__).parent.parent
+MODEL_PATH = BASE / "models/xgb_model_v3_all4.pkl"
+PRED_PATH  = BASE / "data/test_predictions.csv"
+FIG_DIR    = BASE / "figures"
 FEATURES   = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
 
-import os
 os.makedirs(FIG_DIR, exist_ok=True)
+
+plt.rcParams["font.family"] = "AppleGothic"
+plt.rcParams["axes.unicode_minus"] = False
 
 plt.rcParams.update({
     "figure.dpi"    : 150,

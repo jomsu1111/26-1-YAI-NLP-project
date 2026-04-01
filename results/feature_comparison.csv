@@ -2,3 +2,5 @@ version,features,val_auroc,val_f1
 v1_ner,"['nli_score', 'ner_jaccard', 'sbert_cosine']",0.7218,0.6655
 v2_rougel,"['nli_score', 'rouge_l', 'sbert_cosine']",0.8159,0.7442
 v3_all4,"['nli_score', 'ner_jaccard', 'sbert_cosine', 'rouge_l']",0.8279,0.7529
+v4_no_sbert,"['nli_score', 'ner_jaccard', 'rouge_l']",0.8097,0.7533
+v5_rouge_nli,"['nli_score', 'rouge_l']",0.7882,0.7440
