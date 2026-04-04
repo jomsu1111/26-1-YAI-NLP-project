@@ -2,34 +2,35 @@
 XGBoost 평가 결과
 ============================================================
 
-[Threshold: 0.40  (val F1 최대화 기준)]
+[Threshold: 0.47  (val F1 최대화 기준)]
 
-[전체 (n=4,500)]
-  AUROC    : 0.8194
-  F1       : 0.7655
-  Precision: 0.6663
-  Recall   : 0.8993
+[전체 (n=3,717)]
+  AUROC    : 0.9208
+  F1       : 0.8356
+  Precision: 0.8247
+  Recall   : 0.8468
 
               precision    recall  f1-score   support
 
-       정상(0)       0.84      0.55      0.66      2246
-       환각(1)       0.67      0.90      0.77      2254
+       정상(0)       0.84      0.82      0.83      1850
+       환각(1)       0.82      0.85      0.84      1867
 
-    accuracy                           0.72      4500
-   macro avg       0.76      0.72      0.72      4500
-weighted avg       0.76      0.72      0.72      4500
+    accuracy                           0.83      3717
+   macro avg       0.83      0.83      0.83      3717
+weighted avg       0.83      0.83      0.83      3717
 
 
 [도메인별 AUROC]
-  dialogue          : n=1,502  AUROC=0.6875
-  qa                : n=1,475  AUROC=0.9904
-  summarization     : n=1,523  AUROC=0.7281
+  dialogue          : n=  763  AUROC=0.8895
+  qa                : n=1,433  AUROC=0.9939
+  summarization     : n=1,521  AUROC=0.8435
 
 [소스별 AUROC]
-  halueval    : n=4,500  AUROC=0.8194
+  halueval    : n=3,717  AUROC=0.9208
 
 [Feature Importance]
-  rouge_l           : 0.5644  ██████████████████████
-  sbert_cosine      : 0.1919  ███████
-  nli_score         : 0.1387  █████
-  ner_jaccard       : 0.1050  ████
+  gpt_factuality    : 0.6941  ███████████████████████████
+  rouge_l           : 0.1776  ███████
+  sbert_cosine      : 0.0610  ██
+  nli_score         : 0.0384  █
+  ner_jaccard       : 0.0289  █
