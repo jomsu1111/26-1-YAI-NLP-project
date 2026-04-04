@@ -18,7 +18,7 @@ INPUT_PATH  = "../data/feature_matrix.csv"
 OUTPUT_DIR  = "../splits"
 RANDOM_SEED = 42
 
-FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine"]
+FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l", "gpt_factuality"]
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -53,6 +53,12 @@ def split_dataset(df: pd.DataFrame, name: str) -> tuple:
 def main():
     df = pd.read_csv(INPUT_PATH)
     print(f"feature_matrix 로드: {len(df):,} rows")
+
+    # gpt_factuality 실패값(-1.0) NaN 처리
+    if "gpt_factuality" in df.columns:
+        failed = (df["gpt_factuality"] == -1.0).sum()
+        df["gpt_factuality"] = df["gpt_factuality"].replace(-1.0, float("nan"))
+        print(f"gpt_factuality -1.0 → NaN 처리: {failed:,}개")
 
     # Feature 결측 확인
     missing = df[FEATURES].isnull().sum()

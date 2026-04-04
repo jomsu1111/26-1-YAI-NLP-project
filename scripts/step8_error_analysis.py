@@ -26,7 +26,7 @@ PRED_PATH    = BASE / "data/test_predictions.csv"
 TEST_PATH    = BASE / "splits/test.csv"
 FIG_DIR      = BASE / "figures"
 RESULTS_DIR  = BASE / "results"
-FEATURES     = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
+FEATURES     = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l", "gpt_factuality"]
 
 os.makedirs(FIG_DIR, exist_ok=True)
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -143,7 +143,7 @@ print(f"\n  저장: {FIG_DIR}/error_fp_fn_by_domain.png")
 
 print("\n[2] FP / FN 피처값 분포 분석")
 
-fig, axes = plt.subplots(2, 4, figsize=(16, 8))
+fig, axes = plt.subplots(2, len(FEATURES), figsize=(4 * len(FEATURES), 8))
 colors = {"FP": "#E53935", "FN": "#1E88E5", "correct": "#43A047"}
 labels = {"FP": "FP (정상→환각 오판)", "FN": "FN (환각 미탐지)", "correct": "Correct"}
 
@@ -196,7 +196,7 @@ dia_correct = dia[dia["error_type"] == "correct"]
 print(f"  Dialogue 전체: {len(dia)}  FP: {len(dia_fp)}  FN: {len(dia_fn)}  Correct: {len(dia_correct)}")
 
 # 3-1. Dialogue FP / FN 피처 분포 비교
-fig, axes = plt.subplots(1, 4, figsize=(16, 4))
+fig, axes = plt.subplots(1, len(FEATURES), figsize=(4 * len(FEATURES), 4))
 for i, feat in enumerate(FEATURES):
     ax = axes[i]
     for etype, color, label in [

@@ -23,13 +23,13 @@ from sklearn.metrics import (
     classification_report,
 )
 
-MODEL_PATH   = "../models/xgb_model_v3_all4.pkl"
+MODEL_PATH   = "../models/xgb_model_v4_gpt.pkl"
 VAL_PATH     = "../splits/val.csv"
 TEST_PATH    = "../splits/test.csv"
 PRED_PATH    = "../data/test_predictions.csv"
 REPORT_PATH  = "../results/evaluation_report.txt"
 
-FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
+FEATURES = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l", "gpt_factuality"]
 
 
 # ============================================================

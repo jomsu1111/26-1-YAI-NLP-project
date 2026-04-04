@@ -31,6 +31,7 @@ FEATURE_SETS = {
     "v1_ner":    ["nli_score", "ner_jaccard",  "sbert_cosine"],
     "v2_rougel": ["nli_score", "rouge_l",       "sbert_cosine"],
     "v3_all4":   ["nli_score", "ner_jaccard",  "sbert_cosine", "rouge_l"],
+    "v4_gpt":    ["nli_score", "ner_jaccard",  "sbert_cosine", "rouge_l", "gpt_factuality"],
 }
 
 

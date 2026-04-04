@@ -20,10 +20,10 @@ from sklearn.calibration import calibration_curve
 from sklearn.metrics import roc_curve, auc
 
 BASE       = Path(__file__).parent.parent
-MODEL_PATH = BASE / "models/xgb_model_v3_all4.pkl"
+MODEL_PATH = BASE / "models/xgb_model_v4_gpt.pkl"
 PRED_PATH  = BASE / "data/test_predictions.csv"
 FIG_DIR    = BASE / "figures"
-FEATURES   = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l"]
+FEATURES   = ["nli_score", "ner_jaccard", "sbert_cosine", "rouge_l", "gpt_factuality"]
 
 os.makedirs(FIG_DIR, exist_ok=True)
 
