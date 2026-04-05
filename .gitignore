@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 환경변수 / API 키
+.env
+*.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 가상환경
+venv/
+.venv/
+env/
